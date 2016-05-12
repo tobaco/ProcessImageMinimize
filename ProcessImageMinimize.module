@@ -9,7 +9,7 @@ class ProcessImageMinimize extends WireData implements Module, ConfigurableModul
             'title' => 'ProcessImageMinimize / minimize.pw',
             'author' => 'Conclurer GbR',
             'summary' => 'Uses minimize.pw to compress your images on the fly, increasing your site load performance.',
-            'version' => 102,
+            'version' => 103,
             'href' => 'https://minimize.pw',
             'autoload' => true
         );
@@ -20,7 +20,7 @@ class ProcessImageMinimize extends WireData implements Module, ConfigurableModul
     private $log;
     private static $instance = null;
 
-    const mz_version = '1.0.2';
+    const mz_version = '1.0.3';
     const base_url = 'https://minimize.pw/';
 
     const service_url = 'https://minimize.pw/';
@@ -793,7 +793,7 @@ ON " . self::table_name . " (state) USING BTREE");
 
     protected function minimizePageimage($img)
     {
-        if (get_class($img) != 'Pageimage') return;
+        if (get_class($img) != 'Pageimage' && get_class($img) != 'ProcessWire\Pageimage') return;
 
         $image_id = $this->getImageIdByPageimage($img);
 
